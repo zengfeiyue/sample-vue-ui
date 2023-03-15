@@ -1,18 +1,29 @@
 <template>
   <div class="container">
     <Breadcrumb :items="['menu.list', '测试页面']" />
-    <a-card class="general-card" :title="$t('menu.list.searchTable')">
-      <a-row>
-        <a-col :flex="1"></a-col>
-        <a-divider style="height: 84px" direction="vertical" />
-        <a-col :flex="'86px'" style="text-align: right"></a-col>
-      </a-row>
-      <a-divider style="margin-top: 0" />
 
-      <a-row style="margin-bottom: 16px"></a-row>
+    <a-card class="general-card" :title="$t('menu.list.searchTable')">
+      <SearchToolBar :item="searchItemList"></SearchToolBar>
     </a-card>
   </div>
 </template>
+
+<script lang="ts" setup>
+  import SearchToolBar from '@/components/search-toolbar/index.vue';
+  import { SearchItem } from '@/components/search-toolbar/types';
+
+  const searchItemList: Array<SearchItem> = [
+    {
+      lable: 'name1',
+      key: 'name1',
+      type: 'input',
+    },
+    {
+      lable: 'name2',
+      key: 'name2',
+    },
+  ];
+</script>
 
 <style scoped lang="less">
   .container {
