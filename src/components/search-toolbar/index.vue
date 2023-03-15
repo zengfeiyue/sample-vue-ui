@@ -1,4 +1,6 @@
 <template>
+  <template v-if="item.length <= 3"></template>
+  <template v-if="item.length > 3"></template>
   <a-row>
     <a-col :flex="1"></a-col>
     <a-divider style="height: 84px" direction="vertical" />
