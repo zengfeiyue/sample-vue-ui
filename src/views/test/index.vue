@@ -3,7 +3,11 @@
     <Breadcrumb :items="['menu.list', '测试页面']" />
 
     <a-card class="general-card" :title="$t('menu.list.searchTable')">
-      <SearchToolBar :item="searchItemList"></SearchToolBar>
+      <SearchToolBar
+        :form-item="searchItemList"
+        @search="search"
+        @reset="reset"
+      ></SearchToolBar>
     </a-card>
   </div>
 </template>
@@ -14,15 +18,42 @@
 
   const searchItemList: Array<SearchItem> = [
     {
-      lable: 'name1',
+      lable: '第一',
       key: 'name1',
       type: 'input',
+      value: '',
     },
     {
-      lable: 'name2',
+      lable: '第二',
       key: 'name2',
+      type: 'timePicker',
+      value: '',
+    },
+    {
+      lable: '第三',
+      key: 'name3',
+      type: 'select',
+      value: '',
+    },
+    {
+      lable: '第四',
+      key: 'name4',
+      value: '',
+    },
+    {
+      lable: '第五',
+      key: 'name5',
+      value: '',
     },
   ];
+
+  const search = (playload: any) => {
+    console.log(playload);
+  };
+
+  const reset = () => {
+    console.log('reset');
+  };
 </script>
 
 <style scoped lang="less">

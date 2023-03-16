@@ -1,8 +1,8 @@
-export type FormType = 'input' | 'select' | 'readio';
+export type FormType = 'input' | 'select' | 'readio' | 'timePicker';
 export interface SearchItem {
   lable?: string;
   type?: FormType;
   key?: string;
-  value?: object;
-  value2?: object;
+  value?: string | number;
+  value2?: string | number;
 }

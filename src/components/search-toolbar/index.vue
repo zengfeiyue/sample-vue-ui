@@ -1,26 +1,75 @@
 <template>
-  <template v-if="item.length <= 3"></template>
-  <template v-if="item.length > 3"></template>
   <a-row>
-    <a-col :flex="1"></a-col>
+    <a-col :flex="1">
+      <a-form
+        :model="formModel"
+        :label-col-props="{ span: 6 }"
+        :wrapper-col-props="{ span: 18 }"
+        label-align="left"
+      >
+        <a-row :gutter="16">
+          <a-col v-for="item in formItem" :key="item.key" :span="8">
+            <a-form-item :field="item.key" :label="item.lable">
+              <a-input
+                v-if="item.type == 'input'"
+                v-model="formModel[item.key as keyof typeof formModel]"
+                :placeholder="item.lable"
+              />
+              <a-select
+                v-if="item.type == 'select'"
+                v-model="formModel[item.key as keyof typeof formModel]"
+                :placeholder="item.lable"
+              />
+              <a-range-picker
+                v-if="item.type == 'timePicker'"
+                v-model="formModel[item.key as keyof typeof formModel]"
+              />
+            </a-form-item>
+          </a-col>
+        </a-row>
+      </a-form>
+    </a-col>
     <a-divider style="height: 84px" direction="vertical" />
-    <a-col :flex="'86px'" style="text-align: right"></a-col>
+    <a-col :flex="'86px'" style="text-align: right">
+      <a-space direction="vertical" :size="18">
+        <a-button type="primary" @click="search">
+          <template #icon>
+            <icon-search />
+          </template>
+          {{ $t('searchTable.form.search') }}
+        </a-button>
+        <a-button @click="reset">
+          <template #icon>
+            <icon-refresh />
+          </template>
+          {{ $t('searchTable.form.reset') }}
+        </a-button>
+      </a-space>
+    </a-col>
   </a-row>
-
   <a-divider style="margin-top: 0" />
-  <a-row style="margin-bottom: 16px"></a-row>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
+  import { reactive } from 'vue';
+
   import { SearchItem } from './types';
 
-  export default {
-    name: 'SearchToolbar',
-    props: {
-      item: {
-        type: Array<SearchItem>,
-        default: null,
-      },
-    },
+  interface Props {
+    formItem: Array<SearchItem>;
+  }
+  const formModel = reactive({});
+
+  const props = defineProps<Props>();
+
+  const emits = defineEmits(['search', 'reset']);
+
+  const search = () => {
+    emits('search', formModel);
+  };
+
+  const reset = () => {
+    Object.keys(formModel).forEach((key) => {});
+    emits('reset');
   };
 </script>
