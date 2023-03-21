@@ -47,8 +47,8 @@
     },
   ];
 
-  const search = (playload: any) => {
-    console.log(playload);
+  const search = (searchForm: any) => {
+    console.log(searchForm);
   };
 
   const reset = () => {

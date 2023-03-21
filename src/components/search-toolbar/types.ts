@@ -3,6 +3,6 @@ export interface SearchItem {
   lable?: string;
   type?: FormType;
   key?: string;
-  value?: string | number;
+  value?: any;
   value2?: string | number;
 }
