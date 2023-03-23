@@ -37,7 +37,7 @@
     </a-col>
     <a-divider style="height: 42px" direction="vertical" />
     <a-col :flex="'86px'" style="text-align: right">
-      <a-space direction="vertical" :size="18">
+      <a-space direction="horizontal" :size="16">
         <a-button type="primary" @click="search">
           <template #icon>
             <icon-search />
