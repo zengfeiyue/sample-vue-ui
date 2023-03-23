@@ -18,32 +18,48 @@
 
   const searchItemList: Array<SearchItem> = [
     {
-      lable: '第一',
+      lable: '集合编号',
       key: 'name1',
       type: 'input',
-      value: '',
+      value: '第一',
     },
     {
-      lable: '第二',
-      key: 'name2',
-      type: 'timePicker',
-      value: '',
-    },
-    {
-      lable: '第三',
+      lable: '集合选项',
       key: 'name3',
       type: 'select',
-      value: '',
+      options: [
+        {
+          label: '1',
+          value: 'img',
+        },
+        {
+          label: '2',
+          value: 'horizontalVideo',
+        },
+        {
+          label: '3',
+          value: 'verticalVideo',
+        },
+      ],
+      value: 'img',
     },
     {
       lable: '第四',
       key: 'name4',
+      type: 'input',
       value: '',
     },
     {
       lable: '第五',
       key: 'name5',
+      type: 'input',
       value: '',
+    },
+    {
+      lable: '创建时间',
+      key: 'name2',
+      type: 'timePicker',
+      value: ['2023-01-01', '2023-02-01'],
     },
   ];
 

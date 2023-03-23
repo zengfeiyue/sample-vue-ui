@@ -4,5 +4,6 @@ export interface SearchItem {
   type?: FormType;
   key?: string;
   value?: any;
-  value2?: string | number;
+  options?: Array<any>;
+  span?: number;
 }
