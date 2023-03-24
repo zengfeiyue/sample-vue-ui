@@ -44,12 +44,12 @@
           </template>
           {{ $t('searchTable.form.search') }}
         </a-button>
-        <a-button @click="reset">
+        <!-- <a-button @click="reset">
           <template #icon>
             <icon-refresh />
           </template>
           {{ $t('searchTable.form.reset') }}
-        </a-button>
+        </a-button> -->
       </a-space>
     </a-col>
   </a-row>
