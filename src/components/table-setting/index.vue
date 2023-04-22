@@ -54,14 +54,16 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, ref, reactive, watch, nextTick } from 'vue';
+  import { computed, ref, watch, nextTick } from 'vue';
 
   import type { TableColumnData } from '@arco-design/web-vue/es/table/interface';
   import { useI18n } from 'vue-i18n';
   import Sortable from 'sortablejs';
   import cloneDeep from 'lodash/cloneDeep';
 
-  type Column = TableColumnData & { checked?: true };
+  type Column = TableColumnData & {
+    checked?: boolean | (string | number | boolean)[];
+  };
 
   const { t } = useI18n();
   interface Props {
@@ -77,7 +79,7 @@
 
   const size = ref<SizeProps>('medium');
 
-  const emits = defineEmits(['search']);
+  const emits = defineEmits(['reload', 'columnSetting']);
 
   const densityList = computed(() => [
     {
@@ -99,8 +101,7 @@
   ]);
 
   const search = () => {
-    console.log(111);
-    emits('search', {});
+    emits('reload', {});
   };
   const handleSelectDensity = (
     val: string | number | Record<string, any> | undefined,
@@ -128,17 +129,15 @@
   };
 
   const handleChange = (
-    checked: boolean | (string | boolean | number)[],
+    checked: boolean | (string | number | boolean)[],
     column: Column,
     index: number
   ) => {
-    if (!checked) {
-      cloneColumns.value = showColumns.value.filter(
-        (item) => item.dataIndex !== column.dataIndex
-      );
-    } else {
-      cloneColumns.value.splice(index, 0, column);
-    }
+    column.checked = checked;
+    cloneColumns.value = showColumns.value.filter(
+      (item) => item.checked === true
+    );
+    emits('columnSetting', cloneColumns);
   };
 
   const popupVisibleChange = (val: boolean) => {
@@ -152,6 +151,7 @@
             exchangeArray(showColumns.value, oldIndex, newIndex);
           },
         });
+        emits('columnSetting', cloneColumns);
       });
     }
   };
